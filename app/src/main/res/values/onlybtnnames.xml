@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="single">Play a single Video</string>
+    <string name="standalone">Stand Alone Sub Menu</string>
+    <string name="singleVideo">Play Video</string>
+    <string name="playlist">Play Playlist</string>
+
+</resources>

@@ -1,6 +1,9 @@
 package com.aurosaswatraj.youtubeplayer
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.youtube.player.YouTubeStandalonePlayer
@@ -19,14 +22,25 @@ class StandAloneActivity:AppCompatActivity(),View.OnClickListener {
     }
 
     override fun onClick(v: View) {
+        var intent:Intent?=null
 
-        val intent=when(v.id){
-            R.id.btnPlayvideo->{YouTubeStandalonePlayer.createVideoIntent(this,getString(R.string.GOOGLE_API_KEY),YOUTUBE_VIDEO_ID,0,true,false)}
-            R.id.btnPlayPlaylist->{YouTubeStandalonePlayer.createPlaylistIntent(this,getString(R.string.GOOGLE_API_KEY),
-                PLAYLIST_ID,0,0,true,false)}
-            else->throw IllegalArgumentException("Unknown Resourse for button")
+        try {
+             intent=when(v.id){
+                R.id.btnPlayvideo->{YouTubeStandalonePlayer.createVideoIntent(this,getString(R.string.GOOGLE_API_KEY),YOUTUBE_VIDEO_ID,0,true,false)}
+                R.id.btnPlayPlaylist->{YouTubeStandalonePlayer.createPlaylistIntent(this,getString(R.string.GOOGLE_API_KEY),
+                    PLAYLIST_ID,0,0,true,false)}
+                else->throw IllegalArgumentException("Unknown Resourse for button")
+            }
         }
-        startActivity(intent)
+        catch(e:ActivityNotFoundException)
+        {
+            Log.d("StandAloneActivity","Activity Not Found")
+
+        }
+        finally {
+            startActivity(intent)
+        }
+
 
     }
 }
